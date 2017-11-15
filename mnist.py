@@ -51,3 +51,11 @@ def show(image):
     ax.xaxis.set_ticks_position('top')
     ax.yaxis.set_ticks_position('left')
     pyplot.show()
+
+def normalize(data):
+    """
+    Normalize data.
+    :param data: List of tupels with type (numpy.int8, numpy.ndarray)
+    :return: Normalized data
+    """
+    return [(record[0]/10.0, np.array([pixel/256.0 for pixel in record[1]])) for record in data]

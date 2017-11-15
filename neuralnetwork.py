@@ -4,7 +4,7 @@ Implements a Neural Network
 """
 
 import numpy as np
-from mnist import read, show
+from mnist import read, show, normalize
 
 # Import training and test set
 train = list(read('train'))
@@ -18,3 +18,6 @@ test, validation = test[:test_split], test[test_split:]
 print("Train size: {}".format(len(train)))
 print("Test size: {}".format(len(test)))
 print("Validation size: {}".format(len(validation)))
+
+# Normalization for values
+validation = normalize(validation)
