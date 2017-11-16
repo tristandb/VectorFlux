@@ -58,4 +58,4 @@ def normalize(data):
     :param data: List of tupels with type (numpy.int8, numpy.ndarray)
     :return: Normalized data
     """
-    return [(record[0]/10.0, np.array([pixel/256.0 for pixel in record[1]])) for record in data]
+    return np.array([np.array([pixel/256.0 for pixel in record[1]]).flatten() for record in data]), np.array([[record[0]/10.0 for record in data]]).T
