@@ -1,6 +1,9 @@
 import numpy as np
 from vectorflux.layers.Layer import Layer
 from vectorflux.engine.activations import get_activation
+from vectorflux.optimizers import get_optimizer
+from vectorflux.optimizers.ADAM import ADAM
+from vectorflux.optimizers.Momentum import Momentum
 
 
 class Dense(Layer):
@@ -11,7 +14,7 @@ class Dense(Layer):
 
     """
 
-    def __init__(self, units, input_shape, activation=None, use_bias=False):
+    def __init__(self, units, input_shape, activation=None, use_bias=False, optimizer='SGD'):
         super().__init__()
         self.units = units
         self.kernel = 2 * np.random.random((input_shape, units)) - 1
@@ -19,6 +22,7 @@ class Dense(Layer):
         if self.use_bias is not False:
             self.bias = b = np.zeros(units)
         self.activation = get_activation(activation)
+        self.optimizer = get_optimizer(optimizer)
 
     def call(self, input, evaluate = False):
         layer_output = np.dot(input, self.kernel)
@@ -36,6 +40,6 @@ class Dense(Layer):
         # Calculate delta for next iteration
         return_delta = delta.dot(self.kernel.T).copy()
 
-        self.kernel -= alpha * previousvalue.T.dot(delta)
+        self.kernel -= self.optimizer.get_updates(previousvalue.T.dot(delta), alpha)
 
         return return_delta

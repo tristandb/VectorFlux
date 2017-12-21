@@ -5,6 +5,8 @@ import os
 from sklearn.metrics import log_loss, mean_squared_error
 from tqdm import trange
 
+from vectorflux.optimizers.Momentum import Momentum
+
 
 def get_mini_batches(x, y, mini_batch_size):
     n = len(x)
@@ -61,7 +63,6 @@ class VectorFlux():
         :param y_test:
         :return:
         """
-
         for epoch in range(epochs):
             # Get mini batches
             mini_batches_x, mini_batches_y = get_mini_batches(x_train, y_train, mini_batch_size)
