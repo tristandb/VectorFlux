@@ -83,7 +83,7 @@ class VectorFlux():
         layer_output = x_test
         layer_output_list = [layer_output]
         for layer in self.layers:
-            layer_output = layer.call(layer_output)
+            layer_output = layer.call(layer_output, evaluate=True)
             layer_output_list.append(layer_output)
         print("Perf: {}".format(np.sum(np.argmax(y_test, axis=1) == np.argmax(layer_output, axis=1)) / len(x_test)))
 
@@ -92,7 +92,7 @@ class VectorFlux():
         layer_output = x_train
         layer_output_list = [layer_output]
         for layer in self.layers:
-            layer_output = layer.call(layer_output)
+            layer_output = layer.call(layer_output, )
             layer_output_list.append(layer_output)
 
         # Determine gradient

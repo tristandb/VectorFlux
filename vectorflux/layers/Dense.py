@@ -20,7 +20,7 @@ class Dense(Layer):
             self.bias = b = np.zeros(units)
         self.activation = get_activation(activation)
 
-    def call(self, input):
+    def call(self, input, evaluate = False):
         layer_output = np.dot(input, self.kernel)
         if self.use_bias is not False:
             pass
