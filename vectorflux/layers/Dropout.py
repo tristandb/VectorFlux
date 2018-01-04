@@ -11,7 +11,6 @@ class Dropout(Layer):
     def call(self, input, evaluate=False):
         if evaluate:
             return input
-
         return input * np.random.binomial([np.ones((len(input), self.input_shape))], 1 - self.rate)[0] \
                * (1.0 / (1 - self.rate))
 

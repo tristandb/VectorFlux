@@ -2,9 +2,6 @@ import numpy as np
 from vectorflux.layers.Layer import Layer
 from vectorflux.engine.activations import get_activation
 from vectorflux.optimizers import get_optimizer
-from vectorflux.optimizers.ADAM import ADAM
-from vectorflux.optimizers.Momentum import Momentum
-
 
 class Dense(Layer):
     """
@@ -27,7 +24,6 @@ class Dense(Layer):
     def call(self, input, evaluate = False):
         layer_output = np.dot(input, self.kernel)
         if self.use_bias is not False:
-            pass
             layer_output += self.bias
         if self.activation is not None:
             layer_output = self.activation.activate(layer_output)
@@ -40,6 +36,7 @@ class Dense(Layer):
         # Calculate delta for next iteration
         return_delta = delta.dot(self.kernel.T).copy()
 
+        # TODO: Update self.bias
         self.kernel -= self.optimizer.get_updates(previousvalue.T.dot(delta), alpha)
 
         return return_delta

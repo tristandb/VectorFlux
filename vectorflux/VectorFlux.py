@@ -1,11 +1,5 @@
-import random
 import numpy as np
-import pprint
-import os
-from sklearn.metrics import log_loss, mean_squared_error
 from tqdm import trange
-
-from vectorflux.optimizers.Momentum import Momentum
 
 
 def get_mini_batches(x, y, mini_batch_size):
@@ -51,7 +45,7 @@ class VectorFlux():
         self.num_layers += 1
         self.layers.append(layer)
 
-    def train(self, x_train, y_train, epochs, alpha=0.1, mini_batch_size=100, x_test = None, y_test = None):
+    def train(self, x_train, y_train, epochs, alpha=0.1, mini_batch_size=100, x_test=None, y_test=None):
         """
         Train the neural network.
         :param x_train:

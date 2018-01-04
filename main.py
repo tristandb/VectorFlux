@@ -24,5 +24,5 @@ vf.add(Dropout(0.5, input_shape=800))
 vf.add(Dense(800, activation='sigmoid', input_shape=800, optimizer='ADAM'))
 vf.add(Dense(10, activation='sigmoid', input_shape=800))
 
-vf.train(x_train = test_x, y_train = test_y, x_test=test_x, y_test = test_y, epochs=100000, alpha=0.001, mini_batch_size=100)
+vf.train(x_train = train_x, y_train = train_y, x_test=test_x, y_test = test_y, epochs=100000, alpha=0.001, mini_batch_size=100)
 
